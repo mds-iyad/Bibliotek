@@ -39,7 +39,10 @@ dependencies:
   shared_preferences: ^2.0.15
   flutter_svg: ^1.1.5
   http: ^0.13.5
+<<<<<<< HEAD
   
+=======
+>>>>>>> 1cb07e3f6f9cf0d2b141570a05c3bcd4ef0738c7
 
 dev_dependencies:
   flutter_test:
@@ -65,7 +68,10 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/pngtree-cartoon-hand-drawn-teamwork-puzzle-illustration-png-image_1692063.jpeg
+    - assets/images/pngtree-cartoon-hand-drawn-teamwork-puzzle-illustration-png-image_1692063.jpeg
+    - assets/images/Profile_Image.png
+    - assets/icons/User Icon.svg
+    - assets/icons/bell.svg
   #   - images/a_dot_ham.jpeg
   
 

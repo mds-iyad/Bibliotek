@@ -6,3 +6,4 @@ Color kblack = const Color(0xFF000000);
 Color kbrown300 = const Color(0xFF8D6E63);
 Color kbrown = const Color(0xFF795548);
 Color kgrey = const Color(0xFFC0C0C0);
+Color kPrimaryColor = const Color(0xff53EBC4);

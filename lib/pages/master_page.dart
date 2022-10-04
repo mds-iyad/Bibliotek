@@ -1,5 +1,5 @@
 import 'package:bibliotek/pages/book_page.dart';
-import 'package:bibliotek/pages/settings_page.dart';
+import 'package:bibliotek/pages/Profile/profile_page.dart';
 import 'package:bibliotek/pages/home_page.dart';
 import 'package:flutter/material.dart';
 
@@ -15,7 +15,7 @@ class _MasterPageState extends State<MasterPage> {
   final List<Widget> _screens = [
     const HomePage(),
     const BooksPage(),
-    const SettingsPage()
+    const ProfilePage()
   ];
   int _selectedIndex = 0;
 
@@ -32,10 +32,6 @@ class _MasterPageState extends State<MasterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-            foregroundColor: Colors.black87,
-            backgroundColor: const Color(0xff53EBC4),
-            title: const Text("Bibliotek")),
         body: PageView(
           controller: _pageController,
           onPageChanged: _onPageChanged,
@@ -53,8 +49,13 @@ class _MasterPageState extends State<MasterPage> {
                 label: 'Livres',
               ),
               BottomNavigationBarItem(
+<<<<<<< HEAD
                 icon: Icon(Icons.settings),
                 label: 'Paramètres',
+=======
+                icon: Icon(Icons.supervisor_account_rounded),
+                label: 'Profile',
+>>>>>>> 1cb07e3f6f9cf0d2b141570a05c3bcd4ef0738c7
               )
             ],
             currentIndex: _selectedIndex,
