@@ -8,11 +8,30 @@ class BooksPage extends StatefulWidget {
 }
 
 class _BooksPageState extends State<BooksPage> {
-  @override
+ 
+@override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Books page"),
+
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text("Books page"),
+        ),
+        body: GridView.count(
+          // Create a grid with 2 columns. If you change the scrollDirection to
+          // horizontal, this produces 2 rows.
+          crossAxisCount: 2,
+          // Generate 100 widgets that display their index in the List.
+          children: List.generate(10
+          , (index) {
+            return Center(
+              child: Text(
+                'Item $index',
+                style: Theme.of(context).textTheme.headline5,
+              ),
+            );
+          }),
+        ),
       ),
     );
   }
