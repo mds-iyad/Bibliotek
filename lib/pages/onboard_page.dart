@@ -1,4 +1,7 @@
+import 'package:bibliotek/constant/constant.dart';
+import 'package:bibliotek/pages/home_page.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class OnBoardPage extends StatefulWidget {
   const OnBoardPage({Key? key}) : super(key: key);
@@ -8,6 +11,7 @@ class OnBoardPage extends StatefulWidget {
 }
 
 class _OnBoardPageState extends State<OnBoardPage> {
+  int currentIndex = 0;
   late PageController _pageController;
 
   @override
@@ -22,9 +26,40 @@ class _OnBoardPageState extends State<OnBoardPage> {
     super.dispose();
   }
 
+  _storeOnboardInfo() async {
+    print("Shared pref called");
+    int isViewed = 0;
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setInt('onBoard', isViewed);
+    print(prefs.getInt('onBoard'));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: currentIndex % 2 == 0 ? kwhite : kblue,
+      appBar: AppBar(
+          backgroundColor: currentIndex % 2 == 0 ? kwhite : kblue,
+          elevation: 0,
+          actions: [
+            TextButton(
+              onPressed: () {
+                _storeOnboardInfo();
+                Navigator.pushReplacement(context,
+                    MaterialPageRoute(builder: (context) => const HomePage()));
+              },
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+                child: Text(
+                  "Skip",
+                  style: TextStyle(
+                      color: currentIndex % 2 == 0 ? kblack : kwhite,
+                      fontSize: 20,
+                      fontWeight: FontWeight.w700),
+                ),
+              ),
+            )
+          ]),
       body: SafeArea(
         child: Column(
           children: [
@@ -36,6 +71,11 @@ class _OnBoardPageState extends State<OnBoardPage> {
                     image: demo_data[index].image,
                     title: demo_data[index].title,
                     description: demo_data[index].description),
+                onPageChanged: (int index) {
+                  setState(() {
+                    currentIndex = index;
+                  });
+                },
               ),
             ),
             Row(
@@ -86,32 +126,45 @@ class _OnBoardPageState extends State<OnBoardPage> {
 
 class Onboard {
   final String image, title, description;
+  final Color bg, button;
   // final Widget passWidget;
 
-  Onboard({
-    required this.image,
-    required this.title,
-    required this.description,
-    // required this.passWidget
-  });
+  Onboard(
+      {required this.image,
+      required this.title,
+      required this.description,
+      required this.bg,
+      required this.button
+      // required this.passWidget
+      });
 }
 
 final List<Onboard> demo_data = [
   Onboard(
-      image:
-          "assets/pngtree-cartoon-hand-drawn-teamwork-puzzle-illustration-png-image_1692063.jpeg",
-      title: "title text 1",
-      description: "description text"),
+    image:
+        "assets/pngtree-cartoon-hand-drawn-teamwork-puzzle-illustration-png-image_1692063.jpeg",
+    title: "Belajar Dengan Metode Learning by Doing",
+    description:
+        "Sebuah metode belajar yang terbuktiampuh dalam meningkatkan produktifitas belajar, Learning by Doing",
+    bg: Colors.white,
+    button: const Color(0xFF4756DF),
+  ),
   Onboard(
-      image:
-          "assets/pngtree-cartoon-hand-drawn-teamwork-puzzle-illustration-png-image_1692063.jpeg",
-      title: "title text 2",
-      description: "description text"),
+    image:
+        "assets/pngtree-cartoon-hand-drawn-teamwork-puzzle-illustration-png-image_1692063.jpeg",
+    title: "title text 2",
+    description: "description text",
+    bg: const Color(0xFF4756DF),
+    button: Colors.white,
+  ),
   Onboard(
-      image:
-          "assets/pngtree-cartoon-hand-drawn-teamwork-puzzle-illustration-png-image_1692063.jpeg",
-      title: "title text 3",
-      description: "description text"),
+    image:
+        "assets/pngtree-cartoon-hand-drawn-teamwork-puzzle-illustration-png-image_1692063.jpeg",
+    title: "title text 3",
+    description: "description text",
+    bg: Colors.white,
+    button: const Color(0xFF4756DF),
+  ),
 ];
 
 class OnBoardContent extends StatelessWidget {
