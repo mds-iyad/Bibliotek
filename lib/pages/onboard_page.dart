@@ -19,7 +19,7 @@ class _OnBoardPageState extends State<OnBoardPage> {
   final List<Onboard> demo_data = [
     Onboard(
       image:
-          "assets/pngtree-cartoon-hand-drawn-teamwork-puzzle-illustration-png-image_1692063.jpeg",
+          "assets/images/pngtree-cartoon-hand-drawn-teamwork-puzzle-illustration-png-image_1692063.jpeg",
       title: "title 1 ",
       description: "description 1",
       bg: Colors.white,
@@ -27,7 +27,7 @@ class _OnBoardPageState extends State<OnBoardPage> {
     ),
     Onboard(
       image:
-          "assets/pngtree-cartoon-hand-drawn-teamwork-puzzle-illustration-png-image_1692063.jpeg",
+          "assets/images/pngtree-cartoon-hand-drawn-teamwork-puzzle-illustration-png-image_1692063.jpeg",
       title: "title 2",
       description: "description 2",
       bg: const Color(0xFF4756DF),
@@ -35,7 +35,7 @@ class _OnBoardPageState extends State<OnBoardPage> {
     ),
     Onboard(
       image:
-          "assets/pngtree-cartoon-hand-drawn-teamwork-puzzle-illustration-png-image_1692063.jpeg",
+          "assets/images/pngtree-cartoon-hand-drawn-teamwork-puzzle-illustration-png-image_1692063.jpeg",
       title: "title 3",
       description: "description 3",
       bg: Colors.white,
@@ -56,11 +56,9 @@ class _OnBoardPageState extends State<OnBoardPage> {
   }
 
   _storeOnboardInfo() async {
-    print("Shared pref called");
     int isViewed = 0;
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setInt('onBoard', isViewed);
-    print(prefs.getInt('onBoard'));
   }
 
   @override
@@ -108,7 +106,7 @@ class _OnBoardPageState extends State<OnBoardPage> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Image.asset(demo_data[index].image),
-                  Container(
+                  SizedBox(
                     height: 10.0,
                     child: ListView.builder(
                       itemCount: demo_data.length,
@@ -155,7 +153,6 @@ class _OnBoardPageState extends State<OnBoardPage> {
                   ),
                   InkWell(
                     onTap: () async {
-                      print(index);
                       if (index == demo_data.length - 1) {
                         await _storeOnboardInfo();
                         Navigator.pushReplacement(
@@ -166,7 +163,7 @@ class _OnBoardPageState extends State<OnBoardPage> {
 
                       _pageController.nextPage(
                         duration: const Duration(milliseconds: 300),
-                        curve: Curves.bounceIn,
+                        curve: Curves.ease,
                       );
                     },
                     child: Container(

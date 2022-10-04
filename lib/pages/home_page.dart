@@ -23,6 +23,10 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+          foregroundColor: Colors.black87,
+          backgroundColor: const Color(0xff53EBC4),
+          title: const Text("BiblioTek")),
       body: Column(children: [
         SizedBox(
           width: 200,
