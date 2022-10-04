@@ -46,15 +46,15 @@ class _MasterPageState extends State<MasterPage> {
             items: const <BottomNavigationBarItem>[
               BottomNavigationBarItem(
                 icon: Icon(Icons.home),
-                label: 'Home',
+                label: 'Accueil',
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.menu_book),
-                label: 'Books',
+                label: 'Livres',
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.settings),
-                label: 'Settings',
+                label: 'Paramètres',
               )
             ],
             currentIndex: _selectedIndex,
