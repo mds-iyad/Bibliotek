@@ -14,7 +14,6 @@ class _MasterPageState extends State<MasterPage> {
   final PageController _pageController = PageController();
   final List<Widget> _screens = [
     const HomePage(),
-    // Text("dddd"),
     const BooksPage(),
     const SettingsPage()
   ];
@@ -33,36 +32,33 @@ class _MasterPageState extends State<MasterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-          backgroundColor: const Color(0xff53EBC4),
-          title: const Text(
-            "BiblioTek",
-            style: TextStyle(color: Colors.black87),
-          )),
-      body: PageView(
-        controller: _pageController,
-        onPageChanged: _onPageChanged,
-        //physics: const NeverScrollableScrollPhysics(),
-        children: _screens,
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-          items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label: 'Home',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.menu_book),
-              label: 'Books',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.settings),
-              label: 'Settings',
-            )
-          ],
-          currentIndex: _selectedIndex,
-          onTap: _onItemTapped,
-          selectedItemColor: const Color(0xff53EBC4)),
-    );
+        appBar: AppBar(
+            foregroundColor: Colors.black87,
+            backgroundColor: const Color(0xff53EBC4),
+            title: const Text("BiblioTek")),
+        body: PageView(
+          controller: _pageController,
+          onPageChanged: _onPageChanged,
+          //physics: const NeverScrollableScrollPhysics(),
+          children: _screens,
+        ),
+        bottomNavigationBar: BottomNavigationBar(
+            items: const <BottomNavigationBarItem>[
+              BottomNavigationBarItem(
+                icon: Icon(Icons.home),
+                label: 'Home',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.menu_book),
+                label: 'Books',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.settings),
+                label: 'Settings',
+              )
+            ],
+            currentIndex: _selectedIndex,
+            onTap: _onItemTapped,
+            selectedItemColor: const Color(0xff53EBC4)));
   }
 }
