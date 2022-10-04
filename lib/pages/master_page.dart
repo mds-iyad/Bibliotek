@@ -35,7 +35,7 @@ class _MasterPageState extends State<MasterPage> {
         appBar: AppBar(
             foregroundColor: Colors.black87,
             backgroundColor: const Color(0xff53EBC4),
-            title: const Text("BiblioTek")),
+            title: const Text("Bibliotek")),
         body: PageView(
           controller: _pageController,
           onPageChanged: _onPageChanged,

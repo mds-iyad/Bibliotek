@@ -37,7 +37,7 @@ class _HomePageState extends State<HomePage> {
             onPressed: onPressed2,
             child: const Text("on board"),
           ),
-        )
+        ),
       ]),
     );
   }
