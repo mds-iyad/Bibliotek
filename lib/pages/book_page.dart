@@ -11,25 +11,45 @@ class _BooksPageState extends State<BooksPage> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      // Hide the debug banner
       debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text("Books page"),
-        ),
-        body: GridView.count(
-          // Create a grid with 2 columns. If you change the scrollDirection to
-          // horizontal, this produces 2 rows.
-          crossAxisCount: 2,
-          // Generate 100 widgets that display their index in the List.
-          children: List.generate(10, (index) {
-            return Center(
-              child: Text(
-                'Item $index',
-                style: Theme.of(context).textTheme.headline5,
-              ),
-            );
-          }),
-        ),
+      home: BookScreen(),
+    );
+  }
+}
+
+class BookScreen extends StatelessWidget {
+  BookScreen({Key? key}) : super(key: key);
+
+  final List<Map> myBooks =
+      List.generate(100, (index) => {"id": index, "name": "Livre $index"})
+          .toList();
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Mes livres'),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        // implement GridView.builder
+        child: GridView.builder(
+            gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                maxCrossAxisExtent: 200,
+                childAspectRatio: 3 / 2,
+                crossAxisSpacing: 20,
+                mainAxisSpacing: 20),
+            itemCount: myBooks.length,
+            itemBuilder: (BuildContext ctx, index) {
+              return Container(
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                    color: Colors.blueGrey,
+                    borderRadius: BorderRadius.circular(15)),
+                child: Text(myBooks[index]["name"]),
+              );
+            }),
       ),
     );
   }

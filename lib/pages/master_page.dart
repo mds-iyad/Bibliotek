@@ -49,8 +49,8 @@ class _MasterPageState extends State<MasterPage> {
                 label: 'Ma biblio',
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.supervisor_account_rounded),
-                label: 'Profile',
+                icon: Icon(Icons.settings),
+                label: 'Paramètres',
               )
             ],
             currentIndex: _selectedIndex,
