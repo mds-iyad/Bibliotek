@@ -8,11 +8,10 @@ class BooksPage extends StatefulWidget {
 }
 
 class _BooksPageState extends State<BooksPage> {
- 
-@override
+  @override
   Widget build(BuildContext context) {
-
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
           title: const Text("Books page"),
@@ -22,8 +21,7 @@ class _BooksPageState extends State<BooksPage> {
           // horizontal, this produces 2 rows.
           crossAxisCount: 2,
           // Generate 100 widgets that display their index in the List.
-          children: List.generate(10
-          , (index) {
+          children: List.generate(10, (index) {
             return Center(
               child: Text(
                 'Item $index',

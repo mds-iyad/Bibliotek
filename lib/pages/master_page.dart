@@ -42,11 +42,11 @@ class _MasterPageState extends State<MasterPage> {
             items: const <BottomNavigationBarItem>[
               BottomNavigationBarItem(
                 icon: Icon(Icons.home),
-                label: 'Home',
+                label: 'Accueil',
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.menu_book),
-                label: 'Books',
+                label: 'Ma biblio',
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.supervisor_account_rounded),

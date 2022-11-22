@@ -39,6 +39,8 @@ dependencies:
   shared_preferences: ^2.0.15
   flutter_svg: ^1.1.5
   http: ^0.13.5
+  flutter_custom_clippers: ^2.0.0
+  animated_splash_screen: ^1.3.0
 
 dev_dependencies:
   flutter_test:
@@ -68,6 +70,9 @@ flutter:
     - assets/images/Profile_Image.png
     - assets/icons/User Icon.svg
     - assets/icons/bell.svg
+    - assets/images/background.jpg
+    - assets/images/logo-bleu.png
+    - assets/images/logo-noir.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

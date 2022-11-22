@@ -3,6 +3,7 @@
 import 'package:bibliotek/constant/constant.dart';
 import 'package:bibliotek/pages/master_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class OnBoardPage extends StatefulWidget {
@@ -65,133 +66,187 @@ class _OnBoardPageState extends State<OnBoardPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: currentIndex % 2 == 0 ? kwhite : kblue,
-      appBar: AppBar(
-          backgroundColor: currentIndex % 2 == 0 ? kwhite : kblue,
-          elevation: 0,
-          actions: [
-            TextButton(
-              onPressed: () {
-                _storeOnboardInfo();
-                Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const MasterPage()));
-              },
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-                child: Text(
-                  "Skip",
-                  style: TextStyle(
-                      color: currentIndex % 2 == 0 ? kblack : kwhite,
-                      fontSize: 20,
-                      fontWeight: FontWeight.w700),
-                ),
+      body: Stack(
+        children: [
+          Container(
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage("assets/images/background.jpg"),
+                fit: BoxFit.cover,
               ),
-            )
-          ]),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20.0),
-        child: PageView.builder(
-            itemCount: demo_data.length,
-            controller: _pageController,
-            onPageChanged: (int index) {
-              setState(() {
-                currentIndex = index;
-              });
-            },
-            itemBuilder: (_, index) {
-              return Column(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Image.asset(demo_data[index].image),
-                  SizedBox(
-                    height: 10.0,
-                    child: ListView.builder(
-                      itemCount: demo_data.length,
-                      shrinkWrap: true,
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index) {
-                        return Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Container(
-                                margin:
-                                    const EdgeInsets.symmetric(horizontal: 3.0),
-                                width: currentIndex == index ? 25 : 8,
-                                height: 8,
-                                decoration: BoxDecoration(
-                                  color: currentIndex == index
-                                      ? kbrown
-                                      : kbrown300,
-                                  borderRadius: BorderRadius.circular(10.0),
+            ),
+            child: null /* add child content here */,
+          ),
+          PageView.builder(
+              itemCount: demo_data.length,
+              controller: _pageController,
+              onPageChanged: (int index) {
+                setState(() {
+                  currentIndex = index;
+                });
+              },
+              itemBuilder: (_, index) {
+                return Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        TextButton(
+                          onPressed: () {
+                            _storeOnboardInfo();
+                            Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const MasterPage()));
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.fromLTRB(20, 45, 20, 0),
+                            child: Text(
+                              "Skip",
+                              style: TextStyle(
+                                  color:
+                                      currentIndex % 2 == 0 ? kwhite : kwhite,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w700),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    //Image.asset(demo_data[index].image),
+                    SizedBox(
+                      height: 10.0,
+                      child: ListView.builder(
+                        itemCount: demo_data.length,
+                        shrinkWrap: true,
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (context, index) {
+                          return Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Container(
+                                  margin: const EdgeInsets.symmetric(
+                                      horizontal: 3.0),
+                                  width: currentIndex == index ? 25 : 8,
+                                  height: 8,
+                                  decoration: BoxDecoration(
+                                    color: currentIndex == index
+                                        ? kbrown
+                                        : kbrown300,
+                                    borderRadius: BorderRadius.circular(10.0),
+                                  ),
                                 ),
-                              ),
-                            ]);
-                      },
+                              ]);
+                        },
+                      ),
                     ),
-                  ),
-                  Text(
-                    demo_data[index].title,
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 27.0,
-                      fontWeight: FontWeight.bold,
-                      fontFamily: 'Poppins',
-                      color: index % 2 == 0 ? kblack : kwhite,
-                    ),
-                  ),
-                  Text(
-                    demo_data[index].description,
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 14.0,
-                      fontFamily: 'Montserrat',
-                      color: index % 2 == 0 ? kblack : kwhite,
-                    ),
-                  ),
-                  InkWell(
-                    onTap: () async {
-                      if (index == demo_data.length - 1) {
-                        await _storeOnboardInfo();
-                        Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const MasterPage()));
-                      }
 
-                      _pageController.nextPage(
-                        duration: const Duration(milliseconds: 300),
-                        curve: Curves.ease,
-                      );
-                    },
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 30.0, vertical: 10),
-                      decoration: BoxDecoration(
-                          color: index % 2 == 0 ? kblue : kwhite,
-                          borderRadius: BorderRadius.circular(15.0)),
-                      child: Row(mainAxisSize: MainAxisSize.min, children: [
-                        Text(
-                          "Next",
-                          style: TextStyle(
-                              fontSize: 16.0,
-                              color: index % 2 == 0 ? kwhite : kblue),
-                        ),
-                        const SizedBox(
-                          width: 15.0,
-                        ),
-                        Icon(
-                          Icons.arrow_forward_sharp,
-                          color: index % 2 == 0 ? kwhite : kblue,
-                        )
-                      ]),
-                    ),
-                  )
-                ],
-              );
-            }),
+                    Positioned(
+                      top: MediaQuery.of(context).size.height / 2,
+                      child: Column(
+                        children: [
+                          ClipPath(
+                            clipper: OvalTopBorderClipper(),
+                            child: Container(
+                              height: 120,
+                              width: MediaQuery.of(context).size.width,
+                              color: const Color(0xFFD9D9D9),
+                              child: Center(
+                                  child: Text(
+                                demo_data[index].title,
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontSize: 27.0,
+                                  fontWeight: FontWeight.bold,
+                                  fontFamily: 'Poppins',
+                                  color: index % 2 == 0 ? kblack : kwhite,
+                                ),
+                              )),
+                            ),
+                          ),
+                          Container(
+                            height: 300,
+                            width: MediaQuery.of(context).size.width,
+                            decoration:
+                                const BoxDecoration(color: Color(0xFFD9D9D9)),
+                            child: Column(
+                              children: [
+                                const SizedBox(height: 20),
+                                Text(
+                                  demo_data[index].description,
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    fontSize: 14.0,
+                                    fontWeight: FontWeight.w600,
+                                    fontFamily: 'Montserrat',
+                                    color: index % 2 == 0 ? kblack : kwhite,
+                                  ),
+                                ),
+                                const Spacer(),
+                                InkWell(
+                                  onTap: () async {
+                                    if (index == demo_data.length - 1) {
+                                      await _storeOnboardInfo();
+                                      Navigator.pushReplacement(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  const MasterPage()));
+                                    }
+                                    _pageController.nextPage(
+                                      duration:
+                                          const Duration(milliseconds: 300),
+                                      curve: Curves.ease,
+                                    );
+                                  },
+                                  child: Container(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 30.0, vertical: 10),
+                                    decoration: BoxDecoration(
+                                        color: index % 2 == 0
+                                            ? const Color(0xFF979797)
+                                            : kwhite,
+                                        borderRadius:
+                                            BorderRadius.circular(15.0)),
+                                    child: Row(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          Text(
+                                            "Explorer",
+                                            style: TextStyle(
+                                                fontSize: 16.0,
+                                                color: index % 2 == 0
+                                                    ? kwhite
+                                                    : kblue),
+                                          ),
+                                          const SizedBox(
+                                            width: 15.0,
+                                          ),
+                                          Icon(
+                                            Icons.arrow_forward_sharp,
+                                            color:
+                                                index % 2 == 0 ? kwhite : kblue,
+                                          )
+                                        ]),
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 25,
+                                )
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                    )
+                  ],
+                );
+              }),
+        ],
       ),
     );
   }
